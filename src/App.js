@@ -1,29 +1,41 @@
 import './App.css';
 import React from 'react';
+
+
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 
-function App() {
+
+import AuthPage from './pages/AuthPage';
+import HomePage from './pages/HomePage';
+import PostPage from './pages/PostPage';
+import AboutPage from './pages/AboutPage';
+import RecipePage from './pages/RecipePage';
+import NavBar from './Components/NavBar/NavBar';
+
+const App = () => {
   return (
     <div>
-      {/* <Nav /> */}
       <Router>
+        <NavBar />
         <Switch>
-          <Route path="/Auth">
-            <h1>This is the auth page</h1>
+          <Route path="/auth">
+            <AuthPage />
           </Route>
           <Route path="/post">
-            <h1>This is the post page</h1>
+            <PostPage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
           </Route>
           <Route path="/recipe/:id">
-            <h1>This is the recipe page</h1>
+            <RecipePage />
           </Route>
           <Route path="/">
-            <h1>This is the home page</h1>
+            <HomePage />
           </Route>
         </Switch>
       </Router>

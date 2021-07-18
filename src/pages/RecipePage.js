@@ -1,5 +1,5 @@
 import React from 'react'
-const RecipePage = () => {
+const RecipePage = props => {
     return (
         <h1>This is the RecipePage</h1>
     );
