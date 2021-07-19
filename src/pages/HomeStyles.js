@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     filter: {
-        width: "80%",
+        width: "75%",
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
     },
     filterCont: {
         paddingLeft: "10%",

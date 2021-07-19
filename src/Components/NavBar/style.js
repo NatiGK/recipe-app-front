@@ -6,13 +6,13 @@ const useStyles = makeStyles((theme) => ({
         width: "300px",
     },
     root: {
-        position: "sticky",
+        position: "fixed",
         display: "flex",
         justifyContent: "center",
         width: "100%",
         background: "#FAFAFA",
         boxShadow: "0px 2px 20px rgba(0,0,0,0.4)",
-        zIndex: "0",
+        zIndex: "1000",
     },
     menuButton: {
         marginRight: theme.spacing(2),
