@@ -33,6 +33,7 @@ const RecipeCardList = props => {
                                 category={recipe.category}
                                 time={recipe.time}
                                 image={recipe.image}
+                                rating={recipe.rating}
                                 key={recipe.id}
                             />
                         )

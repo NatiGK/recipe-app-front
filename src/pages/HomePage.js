@@ -20,6 +20,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: rack,
+        rating: 2.5,
     },
     {
         id: 2,
@@ -27,6 +28,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: burger,
+        rating: 4,
     },
     {
         id: 3,
@@ -34,6 +36,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: rack,
+        rating: 1.5,
     },
     {
         id: 4,
@@ -41,6 +44,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: burger,
+        rating: 6,
     },
     {
         id: 5,
@@ -48,6 +52,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: rack,
+        rating: 3,
     },
     {
         id: 6,
@@ -55,6 +60,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: burger,
+        rating: 3,
     },
     {
         id: 7,
@@ -62,6 +68,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: rack,
+        rating: 3,
     },
     {
         id: 8,
@@ -69,6 +76,7 @@ const recipes = [
         category: "DINNER",
         time: 45,
         image: burger,
+        rating: 3,
     },
 
 ];
@@ -78,8 +86,8 @@ const HomePage = () => {
         <div>
             {/* heading */}
             <div className='heading' id="heading">
-                <div className={classes.content}>
-                    <div className={classes.textCont}>
+                <Grid container className={classes.content}>
+                    <Grid item sm={6} xs={12} className={classes.textCont}>
                         <Typography
                             variant="p"
                             className={classes.topText}
@@ -92,48 +100,61 @@ const HomePage = () => {
                         >
                             COOK DELICIOUS MEALS WITH LESS STRESS AND MORE JOY
                         </Typography>
-                    </div>
-                    <div className={classes.btnCont}>
+                    </Grid>
+                    <Grid item sm={6} xs={12} className={classes.btnCont}>
                         <Button
                             className={classes.btn}
                             variant="contained"
                             color="secondary">
                             Get Started
                         </Button>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             </div>
 
             {/* filters */}
             <div className={classes.filterCont}>
-                <div className={classes.filter}>
-                    <Button className={classes.filterBtn}>
-                        ALL
-                    </Button>
-                    <Button className={classes.filterBtn}>
-                        BREAKFST
-                    </Button>
-                    <Button className={classes.filterBtn}>
-                        LUNCHES
-                    </Button>
-                    <Button className={classes.filterBtn}>
-                        DINNERS
-                    </Button>
-                    <Button className={classes.filterBtn}>
-                        DESSERTS
-                    </Button>
-                    <Button className={classes.filterBtn}>
-                        SNACKS AND APETIZERS
-                    </Button>
-                    <Button className={classes.filterBtn}>
-                        DRINKS
-                    </Button>
-                </div>
+                <Grid container className={classes.filter}>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            ALL
+                        </Button>
+                    </Grid>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            BREAKFST
+                        </Button>
+                    </Grid>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            LUNCHES
+                        </Button>
+                    </Grid>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            DINNERS
+                        </Button>
+                    </Grid>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            DESSERTS
+                        </Button>
+                    </Grid>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            SNACKS
+                        </Button>
+                    </Grid>
+                    <Grid item md={1} xs={3}>
+                        <Button color="primary">
+                            DRINKS
+                        </Button>
+                    </Grid>
+                </Grid>
             </div>
 
             {/* result card list */}
             {/* //title,category, img, time */}
-
             <RecipeCardList recipes={recipes} />
         </div>
     );

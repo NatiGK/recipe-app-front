@@ -2,6 +2,7 @@ import React from 'react';
 
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Card from '@material-ui/core/Card';
+import Rating from '@material-ui/lab/Rating';
 import { CardActionArea, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
 
 import useStyles from './CardStyle';
@@ -32,9 +33,12 @@ const RecipeCard = props => {
                             </Typography>
                         </div>
                         <div className={classes.rating}>
-                            <Typography variant="body2" className={classes.time}>
-                                Rating Soon
-                            </Typography>
+                            <Rating
+                                name="read-only"
+                                value={props.rating}
+                                readOnly size="small"
+                                precision={0.5}
+                            />
                         </div>
                     </div>
                 </CardActionArea>
