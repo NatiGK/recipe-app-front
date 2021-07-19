@@ -8,19 +8,39 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
-import { useTheme } from '@material-ui/core';
+import { Divider, Drawer, IconButton, List, ListItem, ListItemText, useTheme } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import useStyles from './style';
 
-
+const DrawerItem = props => {
+    const classes = props.classes;
+    return (
+        <ListItem>
+            <Link className={classes.link} to={props.to} >
+                <Button color="inherit">
+                    {props.txt}
+                </Button>
+            </Link>
+        </ListItem>
+    );
+}
 
 const NavBar = () => {
 
-    //Heading changes background when scrolled
+    // drawer state
+    const [drawerState, setDrawerState] = React.useState(false);
+    const openDrawer = () => {
+        setDrawerState(true);
+    }
+    const closeDrawer = () => {
+        setDrawerState(false);
+    }
 
     const classes = useStyles();
-    const theme = useTheme();
     return (
+
         <div className="navScrolled" style={{ height: "80px" }}>
             <div className="nav-scrolled" id="nav">
                 <div className={classes.appBar}>
@@ -29,6 +49,7 @@ const NavBar = () => {
                     </IconButton> */}
 
                     {/* icon link */}
+                    {/* ////////////displayed for large/////////////////// */}
                     <Link className={classes.link} to="/">
                         <Typography variant="h6" className={classes.title}>
                             RECIPES
@@ -58,6 +79,32 @@ const NavBar = () => {
                             </Button>
                         </Link>
                     </div>
+                    {/* //////////////END displayed for large//////////////// */}
+
+                    {/* /////////////displayed for small screen size////////////// */}
+                    <div className={classes.smallMenu}>
+                        <IconButton aria-label="delete" color="primary" onClick={openDrawer}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Drawer anchor="left" open={drawerState} onClose={closeDrawer}>
+                            <List style={{ padding: "40px" }}>
+                                <ListItemText>
+                                    <Link to="/" className={classes.link}>
+                                        <Typography variant="h6" className={classes.titleSm}>
+                                            RECIPES
+                                        </Typography>
+                                    </Link>
+                                </ListItemText>
+                            </List>
+                            <Divider />
+                            <List>
+                                <DrawerItem to="/" txt="ALL RECIPES" classes={classes} />
+                                <DrawerItem to="/recipe/:id" txt="MY RECIPES" classes={classes} />
+                                <DrawerItem to="/post" txt="POST RECIPE" classes={classes} />
+                                <DrawerItem to="/about" txt="ABOUT US" classes={classes} />
+                            </List>
+                        </Drawer>
+                    </div>
 
                     {/* search */}
                     <TextField
@@ -65,11 +112,14 @@ const NavBar = () => {
                         className={classes.textField}
                         id="outlined-basic"
                         variant="outlined"
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <AccountCircle />
-                            </InputAdornment>
-                        }
+                        InputProps={{
+                            endAdornment:
+                                <InputAdornment position="start" >
+
+                                    <SearchIcon color="primary" />
+
+                                </InputAdornment>,
+                        }}
                     />
 
 

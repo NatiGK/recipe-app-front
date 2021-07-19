@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     btn: {
+        color: "#333333",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: "10px",
+        },
         [theme.breakpoints.down('sm')]: {
             fontSize: "17px",
         },
@@ -59,13 +63,13 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     filter: {
-        width: "75%",
+        width: "90%",
+        maxWidth: "900px",
         display: "flex",
         justifyContent: "space-between",
     },
     filterCont: {
-        paddingLeft: "10%",
-        paddingRight: "10%",
+        padding: "auto",
         marginTop: "100px",
         display: "flex",
         justifyContent: "center",
