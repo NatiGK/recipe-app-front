@@ -1,4 +1,5 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme,useTheme } from '@material-ui/core/styles';
+let themeR;
 
 const theme = createTheme({
     palette: {
@@ -6,9 +7,40 @@ const theme = createTheme({
             main: "#E07A5F"
         },
         secondary: {
-            main: "#eedd66"
+            main: "#FFD166"
         },
-    }
+        info:{
+          main:"#444499",
+        }
+    },
 });
+theme.typography.body2={
+  fontSize: '1rem',
+  color:'#333333',
+  '@media (min-width:600px)': {
+    fontSize: '1.2rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.4rem',
+  },
+}
+theme.typography.h4={
+  fontSize: '1.3rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.8rem',
+  },
+}
 
+theme.typography.h5={
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
+  },
+}
 export default theme;

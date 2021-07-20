@@ -10,6 +10,7 @@ import RecipeCardList from './../Components/Card/RecipeCardList';
 //temp imports
 import burger from './../img/burger.jpg';
 import rack from './../img/rack.jpg';
+import Heading from '../Components/Heading/Heading';
 
 
 //recipes
@@ -85,32 +86,7 @@ const HomePage = () => {
     return (
         <div>
             {/* heading */}
-            <div className='heading' id="heading">
-                <Grid container className={classes.content}>
-                    <Grid item sm={6} xs={12} className={classes.textCont}>
-                        <Typography
-                            variant="p"
-                            className={classes.topText}
-                        >
-                            AWARD WINNING
-                        </Typography>
-                        <Typography
-                            variant="h3"
-                            className={classes.bottomText}
-                        >
-                            COOK DELICIOUS MEALS WITH LESS STRESS AND MORE JOY
-                        </Typography>
-                    </Grid>
-                    <Grid item sm={6} xs={12} className={classes.btnCont}>
-                        <Button
-                            className={classes.btn}
-                            variant="contained"
-                            color="secondary">
-                            Get Started
-                        </Button>
-                    </Grid>
-                </Grid>
-            </div>
+            <Heading classes="heading"/>
 
             {/* filters */}
             <div className={classes.filterCont}>

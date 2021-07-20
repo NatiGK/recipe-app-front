@@ -1,44 +1,49 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.heading{
-  background-image: url(./bg.png);
+.heading-common {
   width: 100%;
   padding-top: 5%;
   padding-bottom: 5%;
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
-  background-size:cover;
-  background-attachment:local;
+  background-size: cover;
+  background-attachment: local;
   z-index: 0;
 }
-.nav{
+.headingRecipe {
+  background-image: url(./bg2.png);
+}
+.heading {
+  background-image: url(./bg.png);
+}
+.nav {
   position: fixed;
   display: flex;
   justify-content: center;
   width: 100%;
-  background: rgba(225,225,225,0);
+  background: rgba(225, 225, 225, 0);
   box-shadow: none;
   z-index: 1000;
 }
-.nav-scrolled{
+.nav-scrolled {
   position: fixed;
   display: flex;
   justify-content: center;
   width: 100%;
-  background: #FAFAFA;
-  box-shadow: 0px 2px 20px rgba(0,0,0,0.4);
+  background: #fafafa;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.4);
   z-index: 1000;
 }
