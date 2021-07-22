@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop:"7%",
     },
     container:{
-        width:"80%",
+        width:"90%",
     },
     usrInfo:{
         alignItems:"center",
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rating:{
         alignItems:"center",
-        display:"flex",
+        //display:"flex",
         justifyContent:"space-between",
     },
     space:{
@@ -62,6 +62,18 @@ const useStyles = makeStyles((theme) => ({
     paragraph:{
         display:"flex",
         justifyContent:"left"
+    },
+    lgRating:{
+        margin:"10px",
+        [theme.breakpoints.down('sm')]: {
+            display:"none",
+        },
+    },
+    smRating:{
+        margin:"10px",
+          [theme.breakpoints.up('md')]: {
+            display:"none",
+        },
     }
 }));
 

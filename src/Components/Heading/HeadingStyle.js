@@ -38,24 +38,26 @@ const useStyles = makeStyles((theme) => ({
     },
     btnCont: {
         display: "flex",
-        height: "100%",
-        width: "40%",
+        padding:"10px",
         justifyContent: "center",
         alignItems: "center",
     },
     btn: {
         color: "#333333",
+        boxShadow:"none",
+        borderRadius:"10px",
+        fontWeight:"bold",
         [theme.breakpoints.up('xs')]: {
             fontSize: "10px",
         },
         [theme.breakpoints.down('sm')]: {
-            fontSize: "17px",
+            fontSize: "15px",
         },
         [theme.breakpoints.up('md')]: {
-            fontSize: "20px",
+            fontSize: "18px",
         },
         [theme.breakpoints.up('lg')]: {
-            fontSize: "25px",
+            fontSize: "23px",
         },
     },
 }));

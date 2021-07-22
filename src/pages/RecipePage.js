@@ -6,8 +6,7 @@ import Rating from '@material-ui/lab/Rating';
 import useStyles from './RecipeStyle';
 
 //Temporary imports
-import img1 from './../bg.png';
-import img2 from './../bg2.png';
+
 
 
 const RecipeHeading = props =>{
@@ -17,7 +16,7 @@ const RecipeHeading = props =>{
             <div className={classes.usrInfo}>
                 <Avatar className={classes.space}></Avatar>
                 <div className={classes.info}>
-                    <Typography variant="h6">
+                    <Typography variant="body1">
                         {props.userName}
                     </Typography>
                     <Typography variant="body1">
@@ -32,7 +31,16 @@ const RecipeHeading = props =>{
                     value={props.rating}
                     size="large"
                     readOnly
-                    className={classes.space}
+                    className={classes.lgRating}
+                    precision={0.5}
+                />
+                <Rating
+                    name="read-only"
+                    value={props.rating}
+                    size="small"
+                    readOnly
+                    className={classes.smRating}
+                    precision={0.5}
                 />
                 <Typography variant="body2"className={classes.space}>
                     {props.ratingAmount + " ratings"}
@@ -56,27 +64,23 @@ const InfoDispBox = props =>{
 }
 
 const ListItem = props =>{
-    const classes = props.classes;
     return(
-        <Grid container className={classes.listItem}>
-            <Grid item md={6} sm={12} spacing={3}>
-                <Typography variant="body2">
-                    {props.firstItemTxt}
-                </Typography>
-            </Grid>{
-                props.secondItemTxt &&
-                <Grid item md={6} sm={12} xs={12} spacing={6}>
-                    <Typography variant="body2">
-                        {props.secondItemTxt}
-                    </Typography>
-                </Grid>
-            }
+        <Grid item md={6} sm={12}>
+            <Typography variant="body2">
+                {props.itemTxt}
+            </Typography>
         </Grid>
     );
 }
 
+
+/*
+    Component Interface
+
+*/
 const MethodItem = props =>{
     const classes = props.classes;
+    let count=0;
     return(
         <div className={classes.methodBody}>
             <div className={classes.paragraph}>
@@ -94,8 +98,9 @@ const MethodItem = props =>{
             
                     {
                         props.imgs.map(imgSrc=>{
+                            count++;
                             return(
-                                <img className={classes.methodImg} src={imgSrc} alt={props.title}/>
+                                <img key={count}className={classes.methodImg} src={imgSrc} alt={props.title}/>
                             );
                         })
                     }
@@ -105,52 +110,71 @@ const MethodItem = props =>{
     );
 }
 
+
+/*
+    Component props
+    {
+        userName
+        rating
+        ratingAmount
+        title
+        description
+        prepTime
+        cookTime
+        servings
+        ingredients:["asdf","",""]
+        method [{title, description, imgs:["",""]},{...},{..}])
+    }
+*/
 const RecipePage = props => {
+    let count=0;
+    const recipe= props.recipe;
+    console.log(recipe);
     const classes = useStyles();
     return (
         <div>
-        <Heading classes="headingRecipe"/>
-        <div class={classes.rootRecipe}>
-            <div class={classes.container}>
+        <Heading 
+            classes="headingRecipe" 
+            rating={recipe.rating}
+            ratingAmount={recipe.ratingAmount}
+        />
+        <div className={classes.rootRecipe}>
+            <div className={classes.container}>
 
                 {/* recipe heading */}
                 <RecipeHeading 
                     classes={classes}
-                    userName="Temp User"
-                    date={new Date()}
-                    rating={4}
-                    ratingAmount={1200}
+                    userName={recipe.userName}
+                    date={recipe.pubDate}
+                    rating={recipe.rating}
+                    ratingAmount={recipe.ratingAmount}
                 />
 
                 {/* recipe title */}
                 <div style={{margin:"15px",marginTop:"40px"}}>    
                     <Typography variant="h4" color="primary">
-                        Crispy Baked Fish Sandwiches with Avocado Mayo and 
-                        Pickled Onion
+                        {recipe.title}
                     </Typography>
                 </div>
 
                 {/* recipe description */}
                 <div style={{margin:"15px",marginTop:"20px"}}>
                     <Typography variant="body2">
-                        Craving fried fish, but looking forsomething slightly
-                        healthier? Try these crispy baked fish sandwiches with
-                        avocado mayo and pickled onion. It's the creamy, crunchy
-                        , tangy bite you've been looking for.
+                        {recipe.description}
                     </Typography>
                 </div>
+                <Divider />
 
                 {/* recipe time */}
                 <div className={classes.timeDisp} style={{margin:"15px",marginTop:"20px"}}>
-                    <InfoDispBox color={classes.blueHeading} heading="PREP TIME" value="30 mins"/>
-                    <InfoDispBox color={classes.blueHeading} heading="COOK TIME" value="10 mins"/>
-                    <InfoDispBox color={classes.blueHeading} heading="TOTAL TIME" value="40 mins"/>
+                    <InfoDispBox color={classes.blueHeading} heading="PREP TIME" value={recipe.prepTime}/>
+                    <InfoDispBox color={classes.blueHeading} heading="COOK TIME" value={recipe.cookTime}/>
+                    <InfoDispBox color={classes.blueHeading} heading="TOTAL TIME" value={recipe.prepTime+recipe.cookTime}/>
                 </div>
 
                 {/* servings */}
-                <Divider />
                 <div style={{margin:"15px",marginTop:"20px"}}>
-                    <InfoDispBox  color={classes.yellowHeading} heading="SERVING" value="4 servings"/>
+                    <InfoDispBox  color={classes.yellowHeading} heading="SERVING" value={`${recipe.servings} servings`}/>
                 </div>
                 
                 <Divider />
@@ -159,20 +183,15 @@ const RecipePage = props => {
                     <Typography variant="h4" style={{color:"#242424"}}>
                         Ingredients
                     </Typography>
-                    <ListItem 
-                        classes = {classes}
-                        firstItemTxt="1/3 cup apple cider vingar"
-                        secondItemTxt="1 tablespoon sugar"
-                    />
-                    <ListItem 
-                        classes = {classes}
-                        firstItemTxt="1 teaspoon kosher salt"
-                        secondItemTxt="1/2 medium red onion, thinly sliced"
-                    />
-                    <ListItem 
-                        classes = {classes}
-                        firstItemTxt="1 teaspoon kosher salt"
-                    />
+                    <Grid container>
+                        {
+                            recipe.ingredients.map(ingredient=>{
+                            count++;
+                            return(
+                                <ListItem key={count}itemTxt= {ingredient}/>
+                            );
+                        })}
+                    </Grid>
                 </div>
 
                 <Divider />
@@ -181,17 +200,19 @@ const RecipePage = props => {
                     <Typography variant="h4" style={{color:"#242424"}}>
                         Method
                     </Typography>
-                    <MethodItem
-                        step={1}
-                        classes={classes}
-                        title="Preheat the oven, pickle the onions"
-                        description="prealsdjflkajsdfkl sdldfkja sjlaskjf fjkajsd f
-                                    asdfj alskjf kja sdfkja sldfj asjdf lsaj klfajs
-                                    asff;lkja fjlaksjd fka;ksjd flkjasd fkja sdfkj d
-                                    asfdkjas dfjlka sdffj asjdflfjas dfja sdjfkl ajd
-                                    \n jaksdfj asdlfj alkjfd sdlkfj asjd fkajlsd f"
-                        imgs={[img1,img2]}
-                    />
+                    {recipe.method.map(step=>{
+                        count++;
+                        return(
+                            <MethodItem
+                            key={count}
+                            step={count-3}
+                            classes={classes}
+                            title={step.title}
+                            description={step.description}
+                            imgs={step.imgs}
+                            />
+                        );
+                    })}
                 </div>
                 <Divider />
                 
