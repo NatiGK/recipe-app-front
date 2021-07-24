@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         padding: "15px",
+        paddingLeft:"0px",
+        paddingRight:"0px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -78,6 +80,10 @@ const useStyles = makeStyles((theme) => ({
     link: {
         color: "inherit",
         textDecoration: "none"
+    },
+    menuBtn:{
+        margin:"18px",
+        marginLeft:"0px",
     }
 }));
 

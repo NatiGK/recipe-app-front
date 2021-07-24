@@ -15,13 +15,13 @@ const theme = createTheme({
     },
 });
 theme.typography.body2={
-  fontSize: '1rem',
+  fontSize: '0.8rem',
   color:'#333333',
   '@media (min-width:600px)': {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '1.4rem',
+    fontSize: '1.2rem',
   },
 }
 theme.typography.h4={

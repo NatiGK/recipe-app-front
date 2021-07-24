@@ -43,6 +43,29 @@ const NavBar = () => {
 
         <div className="navScrolled" style={{ height: "80px" }}>
             <div className="nav-scrolled" id="nav">
+                <div className={classes.smallMenu}style={{maxWidth:"20px"}}>
+                    <IconButton  className={classes.menuBtn}aria-label="delete" color="primary" onClick={openDrawer}>
+                        <MenuIcon />
+                    </IconButton>
+                    <Drawer anchor="left" open={drawerState} onClose={closeDrawer}>
+                        <List style={{ padding: "40px" }}>
+                            <ListItemText>
+                                <Link to="/" className={classes.link}>
+                                    <Typography variant="h6" className={classes.titleSm}>
+                                        RECIPES
+                                    </Typography>
+                                </Link>
+                            </ListItemText>
+                        </List>
+                        <Divider />
+                        <List>
+                            <DrawerItem to="/" txt="ALL RECIPES" classes={classes} />
+                            <DrawerItem to="/recipe/:id" txt="MY RECIPES" classes={classes} />
+                            <DrawerItem to="/post" txt="POST RECIPE" classes={classes} />
+                            <DrawerItem to="/about" txt="ABOUT US" classes={classes} />
+                        </List>
+                    </Drawer>
+                </div>
                 <div className={classes.appBar}>
                     {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
@@ -79,32 +102,11 @@ const NavBar = () => {
                             </Button>
                         </Link>
                     </div>
+                    
                     {/* //////////////END displayed for large//////////////// */}
 
                     {/* /////////////displayed for small screen size////////////// */}
-                    <div className={classes.smallMenu}>
-                        <IconButton aria-label="delete" color="primary" onClick={openDrawer}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Drawer anchor="left" open={drawerState} onClose={closeDrawer}>
-                            <List style={{ padding: "40px" }}>
-                                <ListItemText>
-                                    <Link to="/" className={classes.link}>
-                                        <Typography variant="h6" className={classes.titleSm}>
-                                            RECIPES
-                                        </Typography>
-                                    </Link>
-                                </ListItemText>
-                            </List>
-                            <Divider />
-                            <List>
-                                <DrawerItem to="/" txt="ALL RECIPES" classes={classes} />
-                                <DrawerItem to="/recipe/:id" txt="MY RECIPES" classes={classes} />
-                                <DrawerItem to="/post" txt="POST RECIPE" classes={classes} />
-                                <DrawerItem to="/about" txt="ABOUT US" classes={classes} />
-                            </List>
-                        </Drawer>
-                    </div>
+                    
 
                     {/* search */}
                     <TextField
