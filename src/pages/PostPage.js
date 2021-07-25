@@ -10,9 +10,9 @@ import React,{useState} from 'react';
 import useStyles from './PostStyles';
 import sideImg from './..//RectangleSid.png';
 
-import BasicInfoDisplay from '../Components/PostPage/BasicInfoDisplay';
-import IngredientsDisplay from '../Components/PostPage/IngredientsDisplay';
-import MethodDisplay from '../Components/PostPage/MethodDisplay';
+import BasicInfoDisplay from '../Components/PostPageArtifacts/BasicInfoDisplay';
+import IngredientsDisplay from '../Components/PostPageArtifacts/IngredientsDisplay';
+import MethodDisplay from '../Components/PostPageArtifacts/MethodDisplay';
 
 function getSteps(){
     return ['Basic Information','Add the Ingredients', 'Specify the method'];

@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core';
+import { BorderColor } from '@material-ui/icons';
 
 export default makeStyles((theme)=>({
     root:{
@@ -17,7 +18,8 @@ export default makeStyles((theme)=>({
     txtField:{
         marginTop:"5px",
         marginBottom:"5px",
-        width:"100%"
+        width:"100%",
+        BorderColor:"#343434"
     },
     txtFieldFirst:{
         marginTop:"10%",
