@@ -70,5 +70,9 @@ export default makeStyles((theme)=>({
     },
     input:{
         color:"#443934",
-    }
+    },
+    formLabelFocused:{
+        color:"rgba(0,0,0,0)",
+        color:"20px"
+    },
 }));

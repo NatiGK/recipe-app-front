@@ -14,7 +14,7 @@ const RecipeCard = props => {
     const classes = useStyles();
     return (
         <Grid item lg={3} md={4} sm={6} xs={12}>
-            <Card className={classes.root}>
+            <Card className={classes.root} elevation={2}>
                 <CardActionArea>
                     <img src={props.image} className={classes.img} alt={props.title} />
                     <CardContent>
@@ -28,7 +28,7 @@ const RecipeCard = props => {
                     <div className={classes.info}>
                         <div className={classes.timeDisp}>
                             <AccessTimeIcon color="secondary" />
-                            <Typography variant="body2" className={classes.time}>
+                            <Typography variant="body1" className={classes.time}>
                                 {props.time + " min"}
                             </Typography>
                         </div>

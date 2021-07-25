@@ -30,7 +30,7 @@ const Heading = props =>{
                         <Button
                             className={classes.btn}
                             variant="contained"
-                            color="secondary">
+                            color="primary">
                             Get Started
                         </Button>
                     </Grid>

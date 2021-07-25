@@ -4,7 +4,6 @@ import {
     Divider, 
     IconButton,
     TextField,
-    Grid,
     Button, 
     Typography,
     InputAdornment 
@@ -92,6 +91,13 @@ const AuthPage = props => {
                             helperText={formik.touched.firstName && formik.errors.firstName}
                             InputProps={{
                                 className: classes.input,
+                            }}
+                            InputLabelProps={{
+                                shrink:false,
+                                FormLabelClasses: {
+                                  root: classes.formLabelRoot,
+                                  focused: classes.formLabelFocused,
+                                },
                             }}
                     />
                     <TextField

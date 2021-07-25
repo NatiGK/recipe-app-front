@@ -44,8 +44,9 @@ const MethodDisplay = props=>{
         setMethodSteps(newMethodSteps);
     }
     const [selectedStepIndex, setSelectedStepIndex] = useState(0);
-    const handleAddStepImgClick = (index) => ()=>{
 
+    //executes when the add image button is clicked
+    const handleAddStepImgClick = (index) => ()=>{
         setSelectedStepIndex(index);
         inputFile.current.click();
     }

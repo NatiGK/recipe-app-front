@@ -43,9 +43,11 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     btn: {
-        color: "#333333",
+        color: "#FAFAFA",
+        // backgroundColor:80b50,30,45)",
+
         boxShadow:"none",
-        borderRadius:"10px",
+        borderRadius:"5px",
         fontWeight:"bold",
         [theme.breakpoints.up('xs')]: {
             fontSize: "10px",
