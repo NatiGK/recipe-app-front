@@ -2,17 +2,22 @@ import React from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core";
+import {useHistory} from "react-router-dom";
+import {useQuery} from "@apollo/client";
+import {GET_ALL_RECIPES} from './../../API/query';
 
 import RecipeCard from './RecipeCard';
+import { AllRecipes } from '../../API/query';
 
 const useStyles = makeStyles((theme) => ({
     cardCont: {
+        width:"100%",
         display: "flex",
-        justifyContent: "center",
+        justifyContent:"center",
     },
     cardList: {
         display: "flex",
-        justifyContent: "space-beteween",
+        justifyContent: "center",
         width: "90%",
         marginTop: "80px",
         marginBottom: "80px",
@@ -20,8 +25,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipeCardList = props => {
-    const recipes = props.recipes;
+    const filter = props.filter;
+    
+    const handleRecipeClicked = (recipeId) =>() =>{
+        history.push(`/recipe/${recipeId}`);
+    }
+    const {loading, error, data} = useQuery(GET_ALL_RECIPES,
+        {
+            variables:{
+                features: {
+                    filter:{
+                        category:filter
+                    }
+                }
+            }
+        }
+    );
+    const history = useHistory();
     const classes = useStyles();
+    if(loading) return <p>Loading...</p>
+    if(error) return <p>Error...{error.message}</p>
+    const recipes = data.allRecipes;
     return (
         <div className={classes.cardCont}>
             <Grid container spacing={3} className={classes.cardList}>
@@ -29,12 +53,14 @@ const RecipeCardList = props => {
                     recipes.map(recipe => {
                         return (
                             < RecipeCard
+                                handleRecipeClicked={handleRecipeClicked}
                                 title={recipe.title}
                                 category={recipe.category}
-                                time={recipe.time}
+                                time={recipe.prepTime+recipe.cookTime}
                                 image={recipe.image}
-                                rating={recipe.rating}
-                                key={recipe.id}
+                                rating={recipe.ratingAverage}
+                                _id={recipe._id}
+                                key={recipe._id}
                             />
                         )
                     })

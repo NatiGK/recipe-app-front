@@ -1,18 +1,27 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useState} from 'react';
 
 import TextField from '@material-ui/core/Textfield';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
-import { Divider, Drawer, IconButton, List, ListItem, ListItemText, useTheme } from '@material-ui/core';
+import { 
+    Divider, 
+    Drawer, 
+    IconButton, 
+    List, 
+    ListItem, 
+    ListItemText, 
+    Menu,
+    MenuItem, } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
-
 import useStyles from './style';
+import { useSelector, useDispatch } from 'react-redux';
+import {logout} from './../../actions';
+
 
 const DrawerItem = props => {
     const classes = props.classes;
@@ -28,7 +37,19 @@ const DrawerItem = props => {
 }
 
 const NavBar = () => {
-
+    //logout
+    const dispatch = useDispatch();
+    //account menu
+    const [anchorEl, setAnchorEl] = useState(null);
+    const handleClick = (event)=>{
+        setAnchorEl(event.currentTarget);
+    }
+    const handleClose = () =>{
+        setAnchorEl(null);
+    }
+    //redux state
+    const loggedUser = useSelector(state=>state.login.logged);
+    const user = useSelector(state=>state.login.user);
     // drawer state
     const [drawerState, setDrawerState] = React.useState(false);
     const openDrawer = () => {
@@ -41,7 +62,7 @@ const NavBar = () => {
     const classes = useStyles();
     return (
 
-        <div className="navScrolled" style={{ height: "80px" }}>
+        <div className="navScrolled" style={{ height: "60px" }}>
             <div className="nav-scrolled" id="nav">
                 <div className={classes.smallMenu}style={{maxWidth:"20px"}}>
                     <IconButton  className={classes.menuBtn}aria-label="delete" color="primary" onClick={openDrawer}>
@@ -60,9 +81,13 @@ const NavBar = () => {
                         <Divider />
                         <List>
                             <DrawerItem to="/" txt="ALL RECIPES" classes={classes} />
-                            <DrawerItem to="/recipe/:id" txt="MY RECIPES" classes={classes} />
+                            {loggedUser&&
                             <DrawerItem to="/post" txt="POST RECIPE" classes={classes} />
+                            }
                             <DrawerItem to="/about" txt="ABOUT US" classes={classes} />
+                            {!loggedUser&&
+                                <DrawerItem to="/auth" txt="SIGN IN" classes={classes} />
+                            }
                         </List>
                     </Drawer>
                 </div>
@@ -86,21 +111,25 @@ const NavBar = () => {
                                 ALL RECIPES
                             </Button>
                         </Link>
-                        <Link className={classes.link} to="/recipe/:id">
-                            <Button color="inherit">
-                                MY RECIPES
-                            </Button>
-                        </Link>
-                        <Link className={classes.link} to="/post">
-                            <Button color="inherit">
-                                POST RECIPE
-                            </Button>
-                        </Link>
+                        {loggedUser&&
+                            <Link className={classes.link} to="/post">
+                                <Button color="inherit">
+                                    POST RECIPE
+                                </Button>
+                            </Link>
+                        }
                         <Link className={classes.link} to="/about">
                             <Button color="inherit">
                                 ABOUT US
                             </Button>
                         </Link>
+                        {!loggedUser&&
+                            <Link className={classes.link} to="/auth">
+                                <Button color="inherit">
+                                    SIGN IN
+                                </Button>
+                            </Link>
+                        }
                     </div>
                     
                     {/* //////////////END displayed for large//////////////// */}
@@ -126,13 +155,30 @@ const NavBar = () => {
 
 
                     {/* avatar */}
-                    <Link className={classes.link} to="/auth">
+                    {loggedUser&&
                         <Avatar
+                            aria-controls="profile-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}
                             className={classes.largeAvatar}
                             alt="Remy Sharp"
                             src="/static/images/avatar/1.jpg"
                         />
-                    </Link>
+                        
+                    }
+                    {loggedUser&&
+                        <Menu
+                            id="profile-menu"
+                            anchorEl = {anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem disabled={true}onClick={handleClose}>{user.name}</MenuItem>
+                            <MenuItem onClick={handleClose}>Change password</MenuItem>
+                            <MenuItem onClick={()=>{dispatch(logout());handleClose()}}>Logout</MenuItem>
+                        </Menu>
+                    }
                 </div>
             </div >
         </div>

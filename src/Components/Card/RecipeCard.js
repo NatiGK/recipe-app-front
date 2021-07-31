@@ -13,9 +13,11 @@ import rack from './../../img/rack.jpg';
 const RecipeCard = props => {
     const classes = useStyles();
     return (
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={3} md={4} sm={6} xs={12} className={classes.gridItem}>
             <Card className={classes.root} elevation={2}>
-                <CardActionArea>
+                <CardActionArea
+                    onClick={props.handleRecipeClicked(props._id)}
+                >
                     <img src={props.image} className={classes.img} alt={props.title} />
                     <CardContent>
                         <Typography variant="body2" className={classes.category}>
@@ -42,9 +44,9 @@ const RecipeCard = props => {
                         </div>
                     </div>
                 </CardActionArea>
-                {/* <CardActions>
+                <CardActions>
 
-                </CardActions> */}
+                </CardActions>
             </Card>
         </Grid>
     );

@@ -1,7 +1,11 @@
 import { Avatar, Divider, Grid, Typography } from '@material-ui/core';
-import React from 'react'
+import React,{useState} from 'react'
 import Heading from '../Components/Heading/Heading';
 import Rating from '@material-ui/lab/Rating';
+import {useQuery} from '@apollo/client';
+import {GET_SINGLE_RECIPE} from './../API/query';
+
+import { useParams } from 'react-router';
 
 import useStyles from './RecipeStyle';
 
@@ -128,14 +132,23 @@ const MethodItem = props =>{
 */
 const RecipePage = props => {
     let count=0;
-    const recipe= props.recipe;
-    console.log(recipe);
     const classes = useStyles();
+    const {loading, error, data} = useQuery(GET_SINGLE_RECIPE,
+        {
+            variables:{
+                _id:useParams().id
+            }
+        }    
+    );
+    if(loading) return <p>Loading...</p>
+    if(error) return <p>Error... {error.message}</p>
+    const recipe= data.recipe;
+    console.log(recipe);
     return (
         <div>
-        <Heading 
+        <Heading
             classes="headingRecipe" 
-            rating={recipe.rating}
+            rating={recipe.ratingAverage}
             ratingAmount={recipe.ratingAmount}
         />
         <div className={classes.rootRecipe}>
@@ -144,8 +157,8 @@ const RecipePage = props => {
                 {/* recipe heading */}
                 <RecipeHeading 
                     classes={classes}
-                    userName={recipe.userName}
-                    date={recipe.pubDate}
+                    userName={"asdfasdf"}
+                    date={new Date()}
                     rating={recipe.rating}
                     ratingAmount={recipe.ratingAmount}
                 />
@@ -207,8 +220,8 @@ const RecipePage = props => {
                             key={count}
                             step={count-3}
                             classes={classes}
-                            title={step.title}
-                            description={step.description}
+                            title={step.stepTitle}
+                            description={step.stepDescription}
                             imgs={step.imgs}
                             />
                         );

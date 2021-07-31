@@ -16,9 +16,16 @@ import useStyles from './AuthStyles';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+import { useMutation } from '@apollo/client';
+import { SIGN_IN, SIGN_UP } from '../API/mutations';
+
 import sideImg from './..//RectangleSid.png';
 
+import {login,logout} from './../actions';
+import { useDispatch } from 'react-redux';
+
 const AuthPage = props => {
+    const dispatch = useDispatch();
     const classes = useStyles();
     const [isPageLogin, setIsPageLogin] = useState(true);
     const [isPageVerify, setIsPageVerify] = useState(false);
@@ -32,6 +39,7 @@ const AuthPage = props => {
 
     const GetStarted = () =>{
 
+        const [signUpAPI,{data, loading, error}] = useMutation(SIGN_UP);
         const validationSchema = Yup.object({
             firstName: Yup
                 .string('Enter your first name.')
@@ -65,9 +73,22 @@ const AuthPage = props => {
             },
             validationSchema: validationSchema,
             onSubmit: (values) =>{
-                alert(JSON.stringify(values,null,2));
+                signUpAPI({
+                    variables:{
+                        user:{
+                            name: values.firstName+' '+values.lastName,
+                            email:values.email,
+                            password:values.password,
+                            passwordConfirm: values.confirmPassword,
+                            avatar:"this.avatar.png"
+                        }
+                    }
+                })
             }
         });
+        if(error) return<p>Error...{error.message}</p>;
+        if(loading) return <p>Loading...</p>
+        if(data && data.signIn !==null) dispatch(login(data.signUp))
         return(
             <div class={classes.registerRoot}>
                 <Divider/>
@@ -93,7 +114,6 @@ const AuthPage = props => {
                                 className: classes.input,
                             }}
                             InputLabelProps={{
-                                shrink:false,
                                 FormLabelClasses: {
                                   root: classes.formLabelRoot,
                                   focused: classes.formLabelFocused,
@@ -186,7 +206,7 @@ const AuthPage = props => {
                                 onClick={toggleAuthView} 
                                 className={classes.toggleLink}
                             >
-                                Already have an account.
+                                Already have an account?
                             </Link>
                         }
 
@@ -196,7 +216,8 @@ const AuthPage = props => {
         );
     }
     const LogIn = () =>{
-
+        
+        const [loginAPI,{data, loading, error}] = useMutation(SIGN_IN);
         const validationSchema = Yup.object({
             email: Yup
                 .string('Enter your email')
@@ -214,7 +235,12 @@ const AuthPage = props => {
             },
             validationSchema:validationSchema,
             onSubmit: (values) =>{
-                alert(JSON.stringify(values,null,2));
+                loginAPI({variables:
+                    {
+                        email: values.email,
+                        password: values.password
+                    }
+                });
             },
         });
         const [isPsdVisible, setIsPsdVisible] = useState(false);
@@ -222,6 +248,9 @@ const AuthPage = props => {
             setIsPsdVisible(!isPsdVisible);
         }
         
+        if(error) return<p>Error...{error.message}</p>;
+        if(loading) return <p>Loading...</p>
+        if(data && data.signIn !==null) dispatch(login(data.signIn))
         return(
             <div class={classes.registerRoot}>
                 <Divider/>
@@ -294,7 +323,7 @@ const AuthPage = props => {
                                 color="red" 
                                 className={classes.toggleLink}
                             >
-                                Create an account.
+                                Create an account?
                             </Link>
                         }
 

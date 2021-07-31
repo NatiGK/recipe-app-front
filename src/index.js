@@ -3,14 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ThemeProvider } from '@material-ui/core/styles';
+import {createStore} from 'redux';
+import allReducers from './reducers';
+import { Provider as ContextProvider} from 'react-redux';
+
+import{
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client"
 
 import theme from './mainTheme';
 
+const store = createStore(allReducers);
+const client = new ApolloClient({
+  uri:'http://localhost:4000/graphql',
+  cache: new InMemoryCache()
+});
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <ContextProvider store={store}>
+          <App />
+        </ContextProvider>
+      </ThemeProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

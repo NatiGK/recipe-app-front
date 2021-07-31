@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.main,
     },
     info: {
+        position:"relative",
+        bottom:"10px",
         width: "88%",
         margin: "auto",
         marginBottom: "10px",
@@ -41,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
     time:{
         color: "#555566",
         paddingLeft:"5px",
+    },
+    gridItem:{
+        display:"flex",
+        justifyContent:"center",
     }
 }));
 

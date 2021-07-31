@@ -1,11 +1,12 @@
 import './App.css';
-import React from 'react';
+import React,{useEffect, useState} from 'react';
+import { useSelector } from 'react-redux';
 
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom';
 
 
@@ -66,19 +67,24 @@ const recipe={
       },
     ]
 }
-
 const App = () => {
+  const loggedUser = useSelector(state=>state.login.logged)
+  
   return (
     <div>
       <Router>
         <NavBar />
         <Switch>
-          <Route path="/auth">
-            <AuthPage />
-          </Route>
-          <Route path="/post">
-            <PostPage />
-          </Route>
+          {loggedUser
+            ?
+            <Route path="/post">
+              <PostPage />
+            </Route>
+            :
+            <Route path="/auth">
+              <AuthPage />
+            </Route>
+          }
           <Route path="/about">
             <AboutPage />
           </Route>

@@ -31,6 +31,7 @@ function getStepContent(step){
 }
 
 const PostPage = () => {
+    const [recipe, setRecipe] = useState();
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
@@ -59,13 +60,13 @@ const PostPage = () => {
                             </Typography>
                         <Divider/>
                         {activeStep===0&&
-                            <BasicInfoDisplay classes={classes}/>
+                            <BasicInfoDisplay classes={classes} recipe={recipe} setRecipe={setRecipe}/>
                         }
                         {activeStep===1&&
-                            <IngredientsDisplay classes={classes}/>
+                            <IngredientsDisplay classes={classes} recipe={recipe} setRecipe={setRecipe}/>
                         }
                         {activeStep===2&&
-                            <MethodDisplay classes={classes}/>
+                            <MethodDisplay classes={classes} recipe={recipe} setRecipe={setRecipe}/>
                         }
                     </div>
                     <Stepper activeStep={activeStep} className={classes.stepperBox}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import useStyles from './HomeStyles';
 import Typography from '@material-ui/core/Typography';
 import bg from './../bg.png';
@@ -12,11 +12,13 @@ import burger from './../img/burger.jpg';
 import rack from './../img/rack.jpg';
 import Heading from '../Components/Heading/Heading';
 
+import { useSelector } from 'react-redux';
+
 
 //recipes
 const recipes = [
     {
-        id: 1,
+        _id: 1,
         title: "Clasic Rack of Lamb",
         category: "DINNER",
         time: 45,
@@ -24,7 +26,7 @@ const recipes = [
         rating: 2.5,
     },
     {
-        id: 2,
+        _id: 2,
         title: "Bison Burger",
         category: "DINNER",
         time: 45,
@@ -32,7 +34,7 @@ const recipes = [
         rating: 4,
     },
     {
-        id: 3,
+        _id: 3,
         title: "Clasic Rack of Lamb",
         category: "DINNER",
         time: 45,
@@ -40,7 +42,7 @@ const recipes = [
         rating: 1.5,
     },
     {
-        id: 4,
+        _id: 4,
         title: "Bison Burger",
         category: "DINNER",
         time: 45,
@@ -48,7 +50,7 @@ const recipes = [
         rating: 6,
     },
     {
-        id: 5,
+        _id: 5,
         title: "Clasic Rack of Lamb",
         category: "DINNER",
         time: 45,
@@ -56,7 +58,7 @@ const recipes = [
         rating: 3,
     },
     {
-        id: 6,
+        _id: 6,
         title: "Bison Burger",
         category: "DINNER",
         time: 45,
@@ -64,7 +66,7 @@ const recipes = [
         rating: 3,
     },
     {
-        id: 7,
+        _id: 7,
         title: "Clasic Rack of Lamb",
         category: "DINNER",
         time: 45,
@@ -72,7 +74,7 @@ const recipes = [
         rating: 3,
     },
     {
-        id: 8,
+        _id: 8,
         title: "Bison Burger",
         category: "DINNER",
         time: 45,
@@ -81,7 +83,12 @@ const recipes = [
     },
 
 ];
-const HomePage = () => {
+const HomePage = props => {
+    const [filterState, setFilterState] = useState(undefined);
+    const handleFilterClicked = (filter)=>()=>{
+        setFilterState(filter);
+    }
+    
     const classes = useStyles();
     return (
         <div>
@@ -92,37 +99,37 @@ const HomePage = () => {
             <div className={classes.filterCont}>
                 <Grid container className={classes.filter}>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
+                        <Button color="primary" onClick={handleFilterClicked(undefined)}>
                             ALL
                         </Button>
                     </Grid>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
-                            BREAKFST
+                        <Button color="primary" onClick={handleFilterClicked('BREAKFAST')}>
+                            BREAKFAST
                         </Button>
                     </Grid>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
-                            LUNCHES
+                        <Button color="primary" onClick={handleFilterClicked('LUNCH')}>
+                            LUNCHES 
                         </Button>
                     </Grid>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
+                        <Button color="primary" onClick={handleFilterClicked('DINNER')}>
                             DINNERS
                         </Button>
                     </Grid>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
+                        <Button color="primary" onClick={handleFilterClicked('DESSERT')}>
                             DESSERTS
                         </Button>
                     </Grid>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
+                        <Button color="primary" onClick={handleFilterClicked('SNACK')}>
                             SNACKS
                         </Button>
                     </Grid>
                     <Grid item md={1} xs={3}>
-                        <Button color="primary">
+                        <Button color="primary" onClick={handleFilterClicked('DRINK')}>
                             DRINKS
                         </Button>
                     </Grid>
@@ -131,7 +138,7 @@ const HomePage = () => {
 
             {/* result card list */}
             {/* //title,category, img, time */}
-            <RecipeCardList recipes={recipes} />
+            <RecipeCardList recipes={recipes} filter={filterState}/>
         </div>
     );
 };
