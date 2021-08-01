@@ -5,12 +5,20 @@ import {
     Typography,
     IconButton
 } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { Add, Delete } from '@material-ui/icons';
 const IngredientsDisplay = props=>{
     const [ingredients, setIngredients] = useState([]);
     const classes = props.classes;
-
+    const setRecipe = props.setRecipe;
+    useEffect(()=>{
+        if(props.recipe.ingredients){
+            setIngredients(props.recipe.ingredients)
+        }
+    },[]);
+    useEffect(()=>{
+        setRecipe(recipe=>({...recipe,ingredients}));
+    },[ingredients])
     const handleOnChange = (index)=>(event)=>{
         let newIngredients = [...ingredients];
         newIngredients[index] = event.target.value;

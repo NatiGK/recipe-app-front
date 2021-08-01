@@ -11,12 +11,11 @@ const BasicInfoDisplay = props=>{
             title:'',
             description:'',
             servings:'',
-            prepTime:'',
-            cookTime:'',
+            prepTime:0,
+            cookTime:0,
         }
     );
-    useEffect(
-        useCallback(()=>{
+    useEffect(()=>{
             if(props.recipe){
                 setBasicInfo({
                     title:props.recipe.title,
@@ -25,27 +24,25 @@ const BasicInfoDisplay = props=>{
                     prepTime: props.recipe.prepTime,
                     cookTime: props.recipe.cookTime,
                 })
-            }
-    }),[props.recipe])
+            }    
+    },[])
+    useEffect(()=>{
+        setRecipe(recipe=>({...recipe, ...basicInfo}));
+    },[basicInfo])
     const handleTitleChange = (event) =>{
-        setBasicInfo({...basicInfo,title: event.target.value});
-        setRecipe({...props.recipe, ...basicInfo});
+        setBasicInfo(basicInfo=>({...basicInfo,title: event.target.value}));
     }
     const handleDescriptionChange = (event) =>{
-        setBasicInfo({...basicInfo,description: event.target.value});
-        setRecipe({...props.recipe, ...basicInfo});
+        setBasicInfo(basicInfo=>({...basicInfo,description: event.target.value}));
     }
     const handleServingsChange = (event) =>{
-        setBasicInfo({...basicInfo,servings: event.target.value});
-        setRecipe({...props.recipe, ...basicInfo});
+        setBasicInfo(basicInfo=>({...basicInfo,servings: parseInt(event.target.value)}));
     }
     const handlePrepTimeChange = (event) =>{
-        setBasicInfo({...basicInfo,prepTime: event.target.value});
-        setRecipe({...props.recipe, ...basicInfo});
+        setBasicInfo(basicInfo=>({...basicInfo,prepTime: parseInt(event.target.value)}));
     }
     const handleCookTimeChange = (event) =>{
-        setBasicInfo({...basicInfo,cookTime: event.target.value});
-        setRecipe({...props.recipe, ...basicInfo});
+        setBasicInfo(basicInfo=>({...basicInfo,cookTime: parseInt(event.target.value)}));
     }
     return(
         <div>
@@ -55,6 +52,7 @@ const BasicInfoDisplay = props=>{
                 id="outlined-basic"
                 variant="outlined"
                 label="Recipe title"
+                value={basicInfo.title}
                 onChange={handleTitleChange}
                 InputProps={{
                     className: classes.input,
@@ -66,8 +64,8 @@ const BasicInfoDisplay = props=>{
                 multiline
                 rows={8}
                 variant="outlined"
+                value={basicInfo.description}
                 onChange={handleDescriptionChange}
-                //value={basicInfo.description||''}
                 InputProps={{
                     className: classes.input,
                 }}
@@ -80,8 +78,8 @@ const BasicInfoDisplay = props=>{
                         id="outlined-basic"
                         variant="outlined"
                         label="Servings"
+                        value={basicInfo.servings}
                         onChange={handleServingsChange}
-                        value={basicInfo.servings||''}
                         InputProps={{
                             className: classes.input,
                         }}

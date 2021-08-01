@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardList: {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "left",
         width: "90%",
         marginTop: "80px",
         marginBottom: "80px",

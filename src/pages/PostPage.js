@@ -6,9 +6,14 @@ import {
     Stepper,
     Typography,
 } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useCallback, useEffect, useState} from 'react';
 import useStyles from './PostStyles';
 import sideImg from './..//RectangleSid.png';
+
+import {useHistory} from 'react-router-dom';
+
+import { useMutation } from '@apollo/client';
+import {POST_RECIPE} from './../API/mutations';
 
 import BasicInfoDisplay from '../Components/PostPage/BasicInfoDisplay';
 import IngredientsDisplay from '../Components/PostPage/IngredientsDisplay';
@@ -31,10 +36,27 @@ function getStepContent(step){
 }
 
 const PostPage = () => {
-    const [recipe, setRecipe] = useState();
+    const history = useHistory();
+    const [postRecipe,{loading,error,data}] = useMutation(POST_RECIPE);
+    const [recipe, setRecipe] = useState({method:[]});
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
+    const [finishPressed,setFinishPressed] = useState(false);
+    useEffect(()=>{
+        console.log(finishPressed);
+
+        if(finishPressed){
+            console.log(recipe);
+            postRecipe({variables:{recipe}});
+            setFinishPressed(false)
+        }
+    },[recipe])
+    const addRecipe=()=>{
+        setFinishPressed(true);
+        console.log(finishPressed);
+        setRecipe(recipe=> ({...recipe,category:"LUNCH"}));
+    }
 
     const handleNext = () =>{
         setActiveStep((prevActiveStep)=>prevActiveStep+1);
@@ -42,6 +64,9 @@ const PostPage = () => {
     const handleBack = () =>{
         setActiveStep((prevActiveStep)=>prevActiveStep-1);
     }
+    if(loading) return <h1>Loading...</h1>
+    if(error) return <h1>Error...{error.message}</h1>
+    if(data) return <h1>{history.push(`/recipe/${data.postRecipe._id}`)}</h1>
     return (
             <div className={classes.root}>
                 
@@ -87,7 +112,7 @@ const PostPage = () => {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={handleNext}
+                                onClick={activeStep === steps.length-1?addRecipe:handleNext}
                             >
                                 {activeStep === steps.length-1?'Finish':'Next'}
                             </Button>

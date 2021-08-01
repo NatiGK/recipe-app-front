@@ -5,43 +5,58 @@ import {
     Typography,
     IconButton
 } from '@material-ui/core';
-import React,{useRef, useState} from 'react';
+import React,{useEffect, useRef, useState} from 'react';
 import { Add, Delete } from '@material-ui/icons';
 
 const MethodDisplay = props=>{
     const classes =  props.classes;
     const[methodSteps,setMethodSteps] = useState([]);
+    const setRecipe = props.setRecipe;
+    useEffect(()=>{
+        if(props.recipe.method){
+            setMethodSteps(props.recipe.method);
+        }
+    },[])
+    useEffect(()=>{
+        setRecipe(recipe=>({...recipe, method: methodSteps}));
+    },[methodSteps]);
     const inputFile = useRef();
     const handleChange = (field, index)=>(event)=>{
         if(field==="title"){
             let newMethodSteps = [...methodSteps];
-            newMethodSteps[index].title = event.target.value;
+            newMethodSteps[index].stepTitle = event.target.value;
             setMethodSteps(newMethodSteps);
         }else if(field==="description"){
             let newMethodSteps = [...methodSteps];
-            newMethodSteps[index].description = event.target.value;
+            newMethodSteps[index].stepDescription = event.target.value;
             setMethodSteps(newMethodSteps);
+            setRecipe({...props.recipe, method: methodSteps});
         }
     }
     const handleAddStep = ()=>{
         let newMethodSteps = [...methodSteps];
         newMethodSteps.push({
-            title:"",
-            description:"",
+            stepTitle:"",
+            stepDescription:"",
             imgs:[],
-            imgObjs:[],
+            // imgObjs:[],
         });
         setMethodSteps(newMethodSteps);
+        setRecipe({...props.recipe, method: methodSteps});
     }
     const handleDeleteStep = (index)=>()=>{
         let newMethodSteps = [...methodSteps];
         newMethodSteps.splice(index,1);
         setMethodSteps(newMethodSteps)
+        setRecipe({...props.recipe, method: methodSteps});
+
     }
     const handleStepImgDelete = (index,iIndex) => ()=>{
         let newMethodSteps = [...methodSteps];
         newMethodSteps[index].imgs.splice(iIndex,1);
         setMethodSteps(newMethodSteps);
+        setRecipe({...props.recipe, method: methodSteps});
+
     }
     const [selectedStepIndex, setSelectedStepIndex] = useState(0);
 
@@ -52,13 +67,15 @@ const MethodDisplay = props=>{
     }
     const handleAddStepImg = (event)=>{
         let newMethodSteps = [...methodSteps];
-        newMethodSteps[selectedStepIndex].imgObjs.push(event.target.files[0]);
+        // newMethodSteps[selectedStepIndex].imgObjs.push(event.target.files[0]);
         const fileReader = new FileReader();
         let url;
         fileReader.onload = () =>{
             url=fileReader.result;
-            newMethodSteps[selectedStepIndex].imgs.push(url);
+            newMethodSteps[selectedStepIndex].imgs.push('image');
+            // newMethodSteps[selectedStepIndex].imgs.push(url);
             setMethodSteps(newMethodSteps);
+            setRecipe({...props.recipe, method: methodSteps});
         }
         fileReader.readAsDataURL(event.target.files[0]);
     }

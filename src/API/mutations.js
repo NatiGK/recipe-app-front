@@ -18,3 +18,11 @@ export const SIGN_UP = gql`
         }
     }
 `;
+
+export const POST_RECIPE = gql`
+    mutation postRecipe($recipe: PostRecipeInput!){
+        postRecipe(recipe: $recipe){
+            _id
+        }
+    }
+`;

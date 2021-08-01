@@ -252,7 +252,7 @@ const AuthPage = props => {
         if(loading) return <p>Loading...</p>
         if(data && data.signIn !==null) dispatch(login(data.signIn))
         return(
-            <div class={classes.registerRoot}>
+            <div className={classes.registerRoot}>
                 <Divider/>
                 <Typography variant="h4" className={classes.center} color="primary">
                     LOG IN
@@ -320,7 +320,6 @@ const AuthPage = props => {
                             <Link 
                                 href="#" 
                                 onClick={toggleAuthView} 
-                                color="red" 
                                 className={classes.toggleLink}
                             >
                                 Create an account?
