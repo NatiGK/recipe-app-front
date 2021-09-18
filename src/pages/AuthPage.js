@@ -260,6 +260,7 @@ const AuthPage = props => {
                 <Divider/>
             
                 <form onSubmit={formik.handleSubmit}>
+                    <div className="text-field-wrapper">
                     <TextField
                             id="email"
                             name="email"
@@ -276,7 +277,8 @@ const AuthPage = props => {
                                 className: classes.input,
                             }}
                     />
-                    
+                    </div>
+                    <div className="text-field-wrapper">
                     <TextField
                             id="password"
                             name="password"
@@ -306,6 +308,7 @@ const AuthPage = props => {
                                     className: classes.input,
                             }}
                     />
+                    </div>
                     <div className={classes.registerBottom}>
                         <Button 
                             type="submit" 

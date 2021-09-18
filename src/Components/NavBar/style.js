@@ -2,11 +2,11 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-        color: "#E07A5F",
+        color: "#FFF",
         width: "40%",
-        minWidth: "150px",
+        minWidth: "250px",
         [theme.breakpoints.down('sm')]: {
-
+            width: "90%",
         },
         [theme.breakpoints.up('md')]: {
 
@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         width: "100%",
-        background: "#FAFAFA",
-        boxShadow: "0px 2px 20px rgba(0,0,0,0.4)",
+        color: "#FFF",
         zIndex: "1000",
     },
     menuButton: {
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         width: "90%",
     },
     menuCont: {
-        display: "flex",
+        display: "block",
         justifyContent: "space-between",
         minWidth: "450px",
         color: "#535774",

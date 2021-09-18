@@ -9,6 +9,7 @@ export const GET_ALL_RECIPES = gql`
             title
             description
             category
+            image
         }
     }
 `;
@@ -27,6 +28,10 @@ export const GET_SINGLE_RECIPE = gql`
                 stepTitle
                 stepDescription
                 imgs
+            }
+            postedBy{
+                name
+                avatar
             }
         }
     }

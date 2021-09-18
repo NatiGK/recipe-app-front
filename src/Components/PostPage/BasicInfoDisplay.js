@@ -1,9 +1,11 @@
 import {
     TextField,
     Grid,
+    Button
 } from '@material-ui/core';
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect,useRef, useCallback} from 'react';
 const BasicInfoDisplay = props=>{
+    const inputFile = useRef();
     const classes = props.classes;
     const setRecipe = props.setRecipe;
     const [basicInfo, setBasicInfo] = useState(
@@ -23,6 +25,8 @@ const BasicInfoDisplay = props=>{
                     servings: props.recipe.servings,
                     prepTime: props.recipe.prepTime,
                     cookTime: props.recipe.cookTime,
+                    image: props.recipe.image,
+                    ext: props.recipe.ext,
                 })
             }    
     },[])
@@ -43,6 +47,19 @@ const BasicInfoDisplay = props=>{
     }
     const handleCookTimeChange = (event) =>{
         setBasicInfo(basicInfo=>({...basicInfo,cookTime: parseInt(event.target.value)}));
+    }
+    const handleAddImage=(event)=>{
+        const ext = event.target.value.split('.').pop();
+        setBasicInfo(basicInfo=>({...basicInfo,ext}));
+        const fileReader = new FileReader();
+        fileReader.onload = () =>{
+            let url=fileReader.result;
+            setBasicInfo(basicInfo=>({...basicInfo,image: url}));
+        }
+        fileReader.readAsDataURL(event.target.files[0]);
+    }
+    const handleAddClicked=()=>{
+        inputFile.current.click();
     }
     return(
         <div>
@@ -113,8 +130,18 @@ const BasicInfoDisplay = props=>{
                             
                         }}
                     />
-                </Grid>  
+                </Grid>
             </Grid>
+            <input 
+                onChange={handleAddImage}
+                type="file" 
+                id="file" 
+                ref={inputFile} 
+                style={{display:"none"}}
+                accept=".jpg,.png,.jpeg"
+            />
+            <img src={basicInfo.image}/>
+            <Button onClick={handleAddClicked}color="secondary" variant="contained">Choose an image</Button>
         </div>
     )
 };

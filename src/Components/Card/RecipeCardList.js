@@ -60,6 +60,7 @@ const RecipeCardList = props => {
                                 image={recipe.image}
                                 rating={recipe.ratingAverage}
                                 _id={recipe._id}
+                                image={recipe.image}
                                 key={recipe._id}
                             />
                         )

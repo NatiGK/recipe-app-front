@@ -30,7 +30,6 @@ const MethodDisplay = props=>{
             let newMethodSteps = [...methodSteps];
             newMethodSteps[index].stepDescription = event.target.value;
             setMethodSteps(newMethodSteps);
-            setRecipe({...props.recipe, method: methodSteps});
         }
     }
     const handleAddStep = ()=>{
@@ -39,41 +38,35 @@ const MethodDisplay = props=>{
             stepTitle:"",
             stepDescription:"",
             imgs:[],
-            // imgObjs:[],
+            exts:[],
         });
         setMethodSteps(newMethodSteps);
-        setRecipe({...props.recipe, method: methodSteps});
     }
     const handleDeleteStep = (index)=>()=>{
         let newMethodSteps = [...methodSteps];
         newMethodSteps.splice(index,1);
-        setMethodSteps(newMethodSteps)
-        setRecipe({...props.recipe, method: methodSteps});
-
+        setMethodSteps(newMethodSteps);
     }
     const handleStepImgDelete = (index,iIndex) => ()=>{
         let newMethodSteps = [...methodSteps];
         newMethodSteps[index].imgs.splice(iIndex,1);
         setMethodSteps(newMethodSteps);
-        setRecipe({...props.recipe, method: methodSteps});
-
     }
     const [selectedStepIndex, setSelectedStepIndex] = useState(0);
 
     //executes when the add image button is clicked
     const handleAddStepImgClick = (index) => ()=>{
-        setSelectedStepIndex(index);
         inputFile.current.click();
     }
-    const handleAddStepImg = (event)=>{
+    const handleAddStepImg = (index)=>(event)=>{
         let newMethodSteps = [...methodSteps];
-        // newMethodSteps[selectedStepIndex].imgObjs.push(event.target.files[0]);
-        const fileReader = new FileReader();
         let url;
+        newMethodSteps[index].exts.push(event.target.value.split('.').pop());
+        const fileReader = new FileReader();
         fileReader.onload = () =>{
             url=fileReader.result;
-            newMethodSteps[selectedStepIndex].imgs.push('image');
-            // newMethodSteps[selectedStepIndex].imgs.push(url);
+            // newMethodSteps[selectedStepIndex].imgs.push('image');
+            newMethodSteps[index].imgs.push(url);
             setMethodSteps(newMethodSteps);
             setRecipe({...props.recipe, method: methodSteps});
         }
@@ -126,7 +119,7 @@ const MethodDisplay = props=>{
                                     }}
                                 />
                                 <input 
-                                    onChange={handleAddStepImg}
+                                    onChange={handleAddStepImg(index)}
                                     type="file" 
                                     id="file" 
                                     ref={inputFile} 

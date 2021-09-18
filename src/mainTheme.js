@@ -4,7 +4,8 @@ let themeR;
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#E07A5F"
+            // main: "#E07A5F"
+            main: "rgb(75,90,225)"
         },
         secondary: {
             main: "#FFD166"

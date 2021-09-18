@@ -47,7 +47,7 @@ const PostPage = () => {
         console.log(finishPressed);
 
         if(finishPressed){
-            console.log(recipe);
+            console.log('what is hapenning');
             postRecipe({variables:{recipe}});
             setFinishPressed(false)
         }
@@ -55,7 +55,7 @@ const PostPage = () => {
     const addRecipe=()=>{
         setFinishPressed(true);
         console.log(finishPressed);
-        setRecipe(recipe=> ({...recipe,category:"LUNCH"}));
+        setRecipe({...recipe,category:"LUNCH"});
     }
 
     const handleNext = () =>{

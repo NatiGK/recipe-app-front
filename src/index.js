@@ -12,12 +12,15 @@ import{
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client"
+import {createUploadLink} from 'apollo-upload-client';
 
 import theme from './mainTheme';
 
 const store = createStore(allReducers);
 const client = new ApolloClient({
-  uri:'http://localhost:4000/graphql',
+  link: createUploadLink({
+    uri: 'http://localhost:4000/graphql'
+  }),
   cache: new InMemoryCache()
 });
 

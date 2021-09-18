@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
     recipeHeading:{
         display:"flex",
         justifyContent:"space-between",
-        borderRadius:"25px 25px 0px 0px",
-        backgroundColor:"#eeeeee",
+        backgroundColor:"#fff",
+        borderRadius:"2px",
+        boxShadow:"0px 0px 25px rgba(50,50,50,0.15)",
         padding:"10px",
     },
     rating:{

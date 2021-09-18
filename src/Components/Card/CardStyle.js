@@ -47,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
     gridItem:{
         display:"flex",
         justifyContent:"center",
+    },
+    action:{
+        height: "100%",
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"space-between",
+        alignItems:"left",
     }
 }));
 

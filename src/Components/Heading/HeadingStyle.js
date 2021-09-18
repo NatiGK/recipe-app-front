@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     content: {
         width: "90%",
+        paddingTop:'25px',
         display: "flex",
         justifyContent: "space-between",
     },
@@ -14,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "22px",
         letterSpacing: "12px",
         [theme.breakpoints.down('sm')]: {
-            fontSize: "15px",
+            fontSize: "17px",
         },
         [theme.breakpoints.up('md')]: {
-            fontSize: "18px",
+            fontSize: "19px",
         },
         [theme.breakpoints.up('lg')]: {
             fontSize: "22px",
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#FAFAFA",
         fontWeight: "bold",
         [theme.breakpoints.down('sm')]: {
-            fontSize: "20px",
+            fontSize: "25px",
         },
         [theme.breakpoints.up('md')]: {
             fontSize: "35px",

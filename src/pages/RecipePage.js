@@ -101,10 +101,9 @@ const MethodItem = props =>{
                 
             
                     {
-                        props.imgs.map(imgSrc=>{
-                            count++;
+                        props.imgs.map((imgSrc,index)=>{
                             return(
-                                <img key={count}className={classes.methodImg} src={imgSrc} alt={props.title}/>
+                                <img key={index}className={classes.methodImg} src={`http://localhost:4000/images/${imgSrc}`} alt={props.title}/>
                             );
                         })
                     }
@@ -157,7 +156,7 @@ const RecipePage = props => {
                 {/* recipe heading */}
                 <RecipeHeading 
                     classes={classes}
-                    userName={"asdfasdf"}
+                    userName={recipe.postedBy.name}
                     date={new Date()}
                     rating={recipe.rating}
                     ratingAmount={recipe.ratingAmount}
@@ -213,12 +212,11 @@ const RecipePage = props => {
                     <Typography variant="h4" style={{color:"#242424"}}>
                         Method
                     </Typography>
-                    {recipe.method.map(step=>{
-                        count++;
+                    {recipe.method.map((step,index)=>{
                         return(
                             <MethodItem
                             key={count}
-                            step={count-3}
+                            step={index+1}
                             classes={classes}
                             title={step.stepTitle}
                             description={step.stepDescription}

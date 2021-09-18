@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme)=>({
         margin:"2%",
         color:"#bbe3e3",
         fontWeight:"bold",
-        backgroundImage:"linear-gradient(-45deg, #229999,#66cccc)",
+        backgroundImage:"linear-gradient(-45deg, rgb(40,45,225),rgb(45,45,180))",
     },
     deleteR:{
         color:"#ac3434"
