@@ -33,8 +33,6 @@ const Heading = props =>{
                         >
                             COOK DELICIOUS MEALS WITH LESS STRESS AND MORE JOY
                         </Typography>
-                    </Grid>
-                    <Grid item sm={6} xs={12} className={classes.btnCont}>
                         <Button
                             className={classes.btn}
                             variant="contained"
@@ -43,6 +41,9 @@ const Heading = props =>{
                         >
                             {!loggedUser?'Get Started':'Start Posting'}
                         </Button>
+                    </Grid>
+                    <Grid item sm={6} xs={12} className={classes.btnCont}>
+                        
                     </Grid>
                 </Grid>
             </div>

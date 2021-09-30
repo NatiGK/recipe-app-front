@@ -103,7 +103,7 @@ const AuthPage = props => {
                             name="firstName"
                             label="First Name"
                             className= {classes.txtFieldFirst}
-                            size="small"
+                            size="large"
                             variant="outlined"
                             value={formik.values.firstName}
                             onChange={formik.handleChange}
@@ -126,7 +126,7 @@ const AuthPage = props => {
                             name="lastName"
                             label="LastName"
                             className = {classes.txtField}
-                            size="small"
+                            size="large"
                             variant="outlined"
                             value={formik.values.lastName}
                             onChange={formik.handleChange}
@@ -144,7 +144,7 @@ const AuthPage = props => {
                             label="Your email"
                             variant="outlined"
                             className = {classes.txtField}
-                            size="small"
+                            size="large"
                             value={formik.values.email}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -160,7 +160,7 @@ const AuthPage = props => {
                             name="password"
                             label="Password"
                             className = {classes.txtField}
-                            size="small"
+                            size="large"
                             variant="outlined"
                             type="password"
                             value={formik.values.password}
@@ -178,7 +178,7 @@ const AuthPage = props => {
                             name="confirmPassword"
                             label="Confirm Password"
                             className = {classes.txtField}
-                            size="small"
+                            size="large"
                             variant="outlined"
                             type="password"
                             value={formik.values.confirmPassword}
@@ -266,7 +266,7 @@ const AuthPage = props => {
                             name="email"
                             label="Email"
                             className = {classes.txtFieldFirst}
-                            size="small"
+                            size="large"
                             variant="outlined"
                             value={formik.values.email}
                             onChange={formik.handleChange}
@@ -284,7 +284,7 @@ const AuthPage = props => {
                             name="password"
                             label="Password"
                             className = {classes.txtField}
-                            size="small"
+                            size="large"
                             variant="outlined"
                             type={isPsdVisible?'text':'password'}
                             value={formik.values.password}
@@ -347,8 +347,8 @@ const AuthPage = props => {
                 </div>
                 
                 <div className={classes.right}>
-                    {isPageLogin &&!isPageVerify&& <h1><LogIn/></h1>}
-                    {!isPageLogin &&!isPageVerify&& <h1><GetStarted/></h1>}
+                    {isPageLogin &&!isPageVerify&& <LogIn/>}
+                    {!isPageLogin &&!isPageVerify&&<GetStarted/>}
                     {isPageVerify && <h1>Confirm</h1>}
                 </div>
                 

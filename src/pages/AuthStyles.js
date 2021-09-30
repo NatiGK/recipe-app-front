@@ -37,23 +37,28 @@ export default makeStyles((theme)=>({
         color:"#6688bb"
     },
     rounded:{
-        borderRadius:"7px",
+        borderRadius:"2px",
         color:"#343434",
         boxShadow:'none',
         fontWeight:'bold',
+        height:"45px"
     },
     right:{
         padding:"4%",
         display:"flex",
         justifyContent:"center",
+        width:"100%",
+        justifyItems:"center",
     },
     fixed:{
+        display:"none",
         position:"fixed",
         width:"20%",
         borderRight:"20px solid #e1e1e1",
         overflow:"hidden",
     },
     left:{
+        display:"none",
         position:"fixed",
         width:"20%",
         borderRight:"20px solid #e1e1e1",
@@ -63,6 +68,7 @@ export default makeStyles((theme)=>({
         },
     },
     fixFixed:{
+        display:"none",
         display:"inline",
         [theme.breakpoints.down('xs')]: {
             display:"none",
